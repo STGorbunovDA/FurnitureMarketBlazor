@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureMarketBlazor.Server", "FurnitureMarketBlazor\Server\FurnitureMarketBlazor.Server.csproj", "{B04C1C84-5B5C-4ECE-945A-77E6DA87C8F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureMarketBlazor.Server", "FurnitureMarketBlazor\Server\FurnitureMarketBlazor.Server.csproj", "{B04C1C84-5B5C-4ECE-945A-77E6DA87C8F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureMarketBlazor.Client", "FurnitureMarketBlazor\Client\FurnitureMarketBlazor.Client.csproj", "{A3818661-9E90-4457-BECF-7B7EAE84CF79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureMarketBlazor.Client", "FurnitureMarketBlazor\Client\FurnitureMarketBlazor.Client.csproj", "{A3818661-9E90-4457-BECF-7B7EAE84CF79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureMarketBlazor.Shared", "FurnitureMarketBlazor\Shared\FurnitureMarketBlazor.Shared.csproj", "{82FAA677-AE51-485A-B788-D1281FDDB5DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureMarketBlazor.Shared", "FurnitureMarketBlazor\Shared\FurnitureMarketBlazor.Shared.csproj", "{82FAA677-AE51-485A-B788-D1281FDDB5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

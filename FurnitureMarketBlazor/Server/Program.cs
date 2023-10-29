@@ -2,6 +2,8 @@ global using FurnitureMarketBlazor.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using FurnitureMarketBlazor.Server.Data;
 global using Microsoft.AspNetCore.Mvc;
+global using FurnitureMarketBlazor.Server.Services.ProductService;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

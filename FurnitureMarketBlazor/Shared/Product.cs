@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿global using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FurnitureMarketBlazor.Shared
 {
