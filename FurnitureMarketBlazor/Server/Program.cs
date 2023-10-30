@@ -20,7 +20,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProductService, ProductService>();
-
 var app = builder.Build();
 
 app.UseSwaggerUI();
