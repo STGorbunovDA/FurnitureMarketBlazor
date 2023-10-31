@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FurnitureMarketBlazor.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231028123057_ProductSeeding")]
+    [Migration("20231031022247_ProductSeeding")]
     partial class ProductSeeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace FurnitureMarketBlazor.Server.Migrations
                         {
                             Id = 1,
                             Description = "Описание кухни 1",
-                            ImageUrl = "https://cloud.mail.ru/public/GWwc/CUW5BiG5e",
+                            ImageUrl = "https://thumb.cloud.mail.ru/weblink/thumb/xw1/GWwc/CUW5BiG5e",
                             Price = 389999.99m,
                             Title = "Отличная кухня 1"
                         },
@@ -63,17 +63,25 @@ namespace FurnitureMarketBlazor.Server.Migrations
                         {
                             Id = 2,
                             Description = "Описание кухни 2",
-                            ImageUrl = "https://cloud.mail.ru/public/Mxek/CqEtuDEe6",
-                            Price = 189999.99m,
+                            ImageUrl = "https://thumb.cloud.mail.ru/weblink/thumb/xw1/Mxek/CqEtuDEe6",
+                            Price = 180000.99m,
                             Title = "Отличная кухня 2"
                         },
                         new
                         {
                             Id = 3,
                             Description = "Описание кухни 3",
-                            ImageUrl = "https://cloud.mail.ru/public/foWx/771H2QoSZ",
-                            Price = 289999.99m,
+                            ImageUrl = "https://thumb.cloud.mail.ru/weblink/thumb/xw1/Xe88/Zj4mZ4pvP",
+                            Price = 301000.00m,
                             Title = "Отличная кухня 3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Описание кухни 4",
+                            ImageUrl = "https://thumb.cloud.mail.ru/weblink/thumb/xw1/foWx/771H2QoSZ",
+                            Price = 90101.00m,
+                            Title = "Отличная кухня 4"
                         });
                 });
 #pragma warning restore 612, 618

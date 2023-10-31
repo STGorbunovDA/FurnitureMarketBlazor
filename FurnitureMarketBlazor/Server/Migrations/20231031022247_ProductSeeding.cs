@@ -27,22 +27,13 @@ namespace FurnitureMarketBlazor.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "Description", "ImageUrl", "Price", "Title" },
-                values: new object[] { 1, "Описание кухни 1", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/GWwc/CUW5BiG5e", 389999.99m, "Отличная кухня 1" });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "Description", "ImageUrl", "Price", "Title" },
-                values: new object[] { 2, "Описание кухни 2", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/Mxek/CqEtuDEe6", 189999.99m, "Отличная кухня 2" });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "Description", "ImageUrl", "Price", "Title" },
-                values: new object[] { 3, "Описание кухни 3", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/Xe88/Zj4mZ4pvP", 289999.99m, "Отличная кухня 3" });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "Description", "ImageUrl", "Price", "Title" },
-                values: new object[] { 4, "Описание кухни 4", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/foWx/771H2QoSZ", 289999.99m, "Отличная кухня 4" });
+                values: new object[,]
+                {
+                    { 1, "Описание кухни 1", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/GWwc/CUW5BiG5e", 389999.99m, "Отличная кухня 1" },
+                    { 2, "Описание кухни 2", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/Mxek/CqEtuDEe6", 180000.99m, "Отличная кухня 2" },
+                    { 3, "Описание кухни 3", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/Xe88/Zj4mZ4pvP", 301000.00m, "Отличная кухня 3" },
+                    { 4, "Описание кухни 4", "https://thumb.cloud.mail.ru/weblink/thumb/xw1/foWx/771H2QoSZ", 90101.00m, "Отличная кухня 4" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
