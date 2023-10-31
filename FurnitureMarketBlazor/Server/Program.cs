@@ -3,7 +3,7 @@ global using Microsoft.EntityFrameworkCore;
 global using FurnitureMarketBlazor.Server.Data;
 global using Microsoft.AspNetCore.Mvc;
 global using FurnitureMarketBlazor.Server.Services.ProductService;
-
+global using FurnitureMarketBlazor.Server.Services.CategoryService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 var app = builder.Build();
 
 app.UseSwaggerUI();
