@@ -4,9 +4,9 @@
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;
+        private readonly IProductServiceServer _productService;
 
-        public ProductController(IProductService productService) => _productService = productService;
+        public ProductController(IProductServiceServer productService) => _productService = productService;
 
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
@@ -26,6 +26,20 @@
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductsByCategory(string categoryUrl)
         {
             var result = await _productService.GetProductsByCategory(categoryUrl);
+            return Ok(result);
+        }
+
+        [HttpGet("search/{searchText}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> SearchProducts(string searchText)
+        {
+            var result = await _productService.SearchProducts(searchText);
+            return Ok(result);
+        }
+
+        [HttpGet("searchsuggestions/{searchText}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductSearchSuggestions(string searchText)
+        {
+            var result = await _productService.GetProductSearchSuggestions(searchText);
             return Ok(result);
         }
     }
