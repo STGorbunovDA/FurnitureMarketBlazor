@@ -6,6 +6,19 @@
 
         public ProductServiceServer(DataContext context) => _context = context;
 
+        public async Task<ServiceResponse<List<Product>>> GetFeaturedProductsAsync()
+        {
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data = await _context.Products
+                     .Where(p => p.Featured)
+                     .Include(p => p.Variants)
+                     .ToListAsync()
+            };
+
+            return response;
+        }
+
         public async Task<ServiceResponse<Product>> GetProductAsync(int productId)
         {
             var response = new ServiceResponse<Product>();
@@ -33,7 +46,7 @@
             return response;
         }
 
-        public async Task<ServiceResponse<List<Product>>> GetProductsByCategory(string categoryUrl)
+        public async Task<ServiceResponse<List<Product>>> GetProductsByCategoryAsync(string categoryUrl)
         {
             var response = new ServiceResponse<List<Product>>
             {
@@ -46,7 +59,7 @@
             return response;
         }
 
-        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
+        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestionsAsync(string searchText)
         {
             var products = await FindProductsBySearchText(searchText);
 
@@ -73,7 +86,7 @@
             return new ServiceResponse<List<string>> { Data = result };
         }
 
-        public async Task<ServiceResponse<List<Product>>> SearchProducts(string searchText)
+        public async Task<ServiceResponse<List<Product>>> SearchProductsAsync(string searchText)
         {
             var response = new ServiceResponse<List<Product>>
             {

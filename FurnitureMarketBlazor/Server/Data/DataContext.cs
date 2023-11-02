@@ -57,7 +57,8 @@
                         Title = "Отличная кухня 1",
                         Description = "Описание кухни 1",
                         ImageUrl = "https://thumb.cloud.mail.ru/weblink/thumb/xw1/GWwc/CUW5BiG5e",
-                        CategoryId = 1
+                        CategoryId = 1,
+                        Featured = true
                     },
                     new Product
                     {
@@ -97,7 +98,8 @@
                         Title = "Отличная мебель 2",
                         Description = "Описание мебель 2",
                         ImageUrl = "https://thumb.cloud.mail.ru/weblink/thumb/xw1/9GtZ/3gqAyzbJs",
-                        CategoryId = 2
+                        CategoryId = 2,
+                        Featured = true
                     },
                     new Product
                     {
@@ -129,7 +131,8 @@
                         Title = "Отличный Санузел 2",
                         Description = "Отличный Санузел 2",
                         ImageUrl = "https://thumb.cloud.mail.ru/weblink/thumb/xw1/KmZ4/tSXu8WCsa",
-                        CategoryId = 3
+                        CategoryId = 3,
+                        Featured = true
                     },
                     new Product
                     {
