@@ -5,8 +5,13 @@
     margin: 0 10px 10px 10px;
 }
 
+/*.media-img-wrapper {
+    width: 500px;
+    text-align: center;
+}*/
+
 .media-img-wrapper {
-    max-width: 600px;
+    max-width: 500px;
     max-height: 500px;
     text-align: center;
 }
