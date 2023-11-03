@@ -1,0 +1,43 @@
+﻿@page "/register"
+
+<PageTitle>Register</PageTitle>
+
+<h3>Register</h3>
+
+<EditForm Model="user" OnValidSubmit="HandleRegistration">
+    <DataAnnotationsValidator />
+    <!-- EditForm компонент в Razor странице позволяет связывать и редактировать данные модели,
+         в данном случае модель 'user' -->
+    <div class="mb-3">
+        <label for="email">Email</label>
+        <!-- InputText компонент позволяет создать текстовое поле для ввода данных.
+        @bind-Value связывает введенное значение с свойством 'user.Email' модели -->
+        <InputText id="email" @bind-Value="user.Email" class="form-control" />
+        <!-- ValidationMessage компонент выводит сообщение об ошибке, если валидация не пройдена -->
+        <ValidationMessage For="@(() => user.Email)" />
+    </div>
+    <div class="mb-3">
+        <label for="password">Password</label>
+        <!-- Аналогично для поля пароля -->
+        <InputText id="password" @bind-Value="user.Password" class="form-control" type="password" />
+        <ValidationMessage For="@(() => user.Password)" />
+    </div>
+    <div class="mb-3">
+        <label for="confirmPassword">Confirm Password</label>
+        <!-- Аналогично для подтверждения пароля -->
+        <InputText id="confirmPassword" @bind-Value="user.ConfirmPassword" class="form-control" type="password" />
+        <ValidationMessage For="@(() => user.ConfirmPassword)" />
+    </div>
+    <!-- Кнопка "Register", при нажатии которой будет выполнена функция 'HandleRegistration' -->
+    <button type="submit" class="btn btn-primary">Register</button>
+</EditForm>
+
+
+@code {
+    UserRegister user = new UserRegister();
+
+    void HandleRegistration()
+    {
+        Console.WriteLine($"Register User with the Email {user.Email}.");
+    }
+}
