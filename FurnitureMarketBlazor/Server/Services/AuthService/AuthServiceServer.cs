@@ -35,8 +35,8 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // Возвращается объект ServiceResponse с данными, содержащими идентификатор пользователя
-            return new ServiceResponse<int> { Data = user.Id };
+            // Возвращается объект ServiceResponse с данными, содержащими идентификатор пользователя и сообщением
+            return new ServiceResponse<int> { Data = user.Id, Message = "Registration successful!" };
         }
 
         // Метод для проверки существования пользователя с указанным email
