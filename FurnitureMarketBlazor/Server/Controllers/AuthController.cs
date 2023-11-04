@@ -1,0 +1,31 @@
+﻿using FurnitureMarketBlazor.Server.Services.AuthService;
+
+namespace FurnitureMarketBlazor.Server.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+        private readonly IAuthServiceServer _authService;
+
+        public AuthController(IAuthServiceServer authService) => _authService = authService;
+
+        [HttpPost("register")]
+        public async Task<ActionResult<ServiceResponse<int>>> Register(UserRegister request)
+        {
+            var response = await _authService.Register(
+                new User
+                {
+                    Email = request.Email
+                },
+                request.Password);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+    }
+}

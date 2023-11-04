@@ -5,6 +5,7 @@ global using Microsoft.AspNetCore.Mvc;
 global using FurnitureMarketBlazor.Server.Services.ProductService;
 global using FurnitureMarketBlazor.Server.Services.CategoryService;
 global using FurnitureMarketBlazor.Server.Services.CartService;
+global using FurnitureMarketBlazor.Server.Services.AuthService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductServiceServer, ProductServiceServer>();
 builder.Services.AddScoped<ICategoryServiceServer, CategoryServiceServer>();
 builder.Services.AddScoped<ICartServiceServer, CartServiceServer>();
+builder.Services.AddScoped<IAuthServiceServer, AuthServiceServer>();
 
 var app = builder.Build();
 
