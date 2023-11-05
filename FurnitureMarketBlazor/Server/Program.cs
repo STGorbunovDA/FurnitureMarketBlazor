@@ -6,7 +6,6 @@ global using FurnitureMarketBlazor.Server.Services.ProductService;
 global using FurnitureMarketBlazor.Server.Services.CategoryService;
 global using FurnitureMarketBlazor.Server.Services.CartService;
 global using FurnitureMarketBlazor.Server.Services.AuthService;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -67,6 +66,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+
+/*
+    * ƒобавл€ет службу IHttpContextAccessor в контейнер зависимостей приложени€.
+
+    * IHttpContextAccessor €вл€етс€ интерфейсом, который предоставл€ет доступ к текущему объекту HttpContext. 
+      ќбъект HttpContext представл€ет контекст выполнени€ дл€ каждого запроса, и содержит информацию о запросе, 
+      ответе и других сведени€х, св€занных с текущим HTTP-запросом.
+
+    * ƒобавление IHttpContextAccessor в контейнер зависимостей позвол€ет внедр€ть его в другие компоненты 
+      приложени€, например, в сервисы или контроллеры. Ёто может быть полезно в ситуаци€х, когда вам может 
+      понадобитьс€ получить доступ к контексту HTTP-запроса внутри сервиса или компонента приложени€, 
+      например, дл€ получени€ информации о текущем пользователе, обработке заголовков запроса и т.д.
+
+    * ¬ целом, IHttpContextAccessor предоставл€ет удобный способ получени€ доступа к контексту HTTP-запроса 
+      внутри зависимых компонентов приложени€.
+*/
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
