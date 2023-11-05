@@ -6,6 +6,9 @@ global using FurnitureMarketBlazor.Server.Services.ProductService;
 global using FurnitureMarketBlazor.Server.Services.CategoryService;
 global using FurnitureMarketBlazor.Server.Services.CartService;
 global using FurnitureMarketBlazor.Server.Services.AuthService;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,45 @@ builder.Services.AddScoped<IProductServiceServer, ProductServiceServer>();
 builder.Services.AddScoped<ICategoryServiceServer, CategoryServiceServer>();
 builder.Services.AddScoped<ICartServiceServer, CartServiceServer>();
 builder.Services.AddScoped<IAuthServiceServer, AuthServiceServer>();
+
+/*
+    *  В данном коде настраивается аутентификация с помощью JWT, где выполняется проверка подписи 
+       и включение необходимых параметров проверки токена. Это позволяет ASP.NET Core приложению 
+       проверять и использовать JWT для аутентификации запросов клиента.
+    
+    * С помощью метода AddAuthentication добавляется сервис аутентификации в контейнер зависимостей приложения. 
+      В данном случае, указывается схема аутентификации JwtBearerDefaults.AuthenticationScheme, 
+      которая предназначена для работы с JWT.
+
+    * Метод AddJwtBearer добавляет JWT-аутентификацию к настройкам аутентификации. Ему передается настройка 
+      options в виде лямбда-выражения.
+
+    * Внутри лямбда-выражения настраиваются параметры проверки токена (TokenValidationParameters). 
+      В данном случае:
+
+        * ValidateIssuerSigningKey - устанавливается значение true, чтобы проверять, что ключ 
+          подписи токена (IssuerSigningKey) является действительным и совпадает с ожидаемым.
+
+        * IssuerSigningKey - устанавливается симметричный ключ подписи токена (SymmetricSecurityKey), 
+          полученный из значения конфигурационного параметра "AppSettings:Token".
+
+        * ValidateIssuer и ValidateAudience - устанавливаются значения false, чтобы отключить проверку 
+          издателя токена (Issuer) и аудитории токена (Audience). То есть, эти параметры не будут 
+          проверяться валидатором.
+*/
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey =
+                new SymmetricSecurityKey(System.Text.Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 var app = builder.Build();
 
@@ -50,6 +92,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
