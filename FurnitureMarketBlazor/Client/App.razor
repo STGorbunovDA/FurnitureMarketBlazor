@@ -3,15 +3,15 @@
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(ShopLayout)">
                 <NotAuthorized>
-                    <h3>Whoops! You're not allowed to see this page.</h3>
-                    <h5> Please 
+                    <h3>Упс! Вам запрещено просматривать эту страницу.</h3>
+                    <h5> Пожалуйста 
                         <a href="login">login
 
                         </a> 
-                        or 
+                        или
                         <a href="register">register
 
-                        </a> for a new account.
+                        </a> для создания новой учетной записи.
                     </h5>
                 </NotAuthorized>
             </AuthorizeRouteView>

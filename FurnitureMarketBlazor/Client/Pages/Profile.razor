@@ -9,7 +9,7 @@
 <h5>Change Password</h5>
 
 <EditForm Model="request" OnValidSubmit="ChangePassword">
-    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <DataAnnotationsValidator/>
     <div class="mb-3">
         <label for="password">New Password</label>
         <InputText id="password" @bind-Value="request.Password" class="form-control" type="password" />

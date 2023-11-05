@@ -1,6 +1,7 @@
 ﻿@inject ILocalStorageService LocalStorage
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject ICartServiceClient CartService
 
 <div class="dropdown">
     <!-- Кнопка, открывающая или закрывающая выпадающее меню -->
@@ -46,6 +47,7 @@
     {
         await LocalStorage.RemoveItemAsync("authToken");
         await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        await CartService.GetCartItemsCount();
         NavigationManager.NavigateTo("");
     }
 }
