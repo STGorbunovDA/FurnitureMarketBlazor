@@ -3,8 +3,25 @@
     public class AuthServiceClient : IAuthServiceClient
     {
         private readonly HttpClient _http;
+        private readonly AuthenticationStateProvider _authStateProvider;
 
-        public AuthServiceClient(HttpClient http) => _http = http;
+        public AuthServiceClient(HttpClient http, AuthenticationStateProvider authStateProvider) =>
+            (_http, _authStateProvider) = (http, authStateProvider);
+
+        /*
+               * Выполняется асинхронный запрос к провайдеру состояния аутентификации (_authStateProvider)
+                 с помощью метода GetAuthenticationStateAsync(), чтобы получить текущее состояние аутентификации
+                 - var authenticationState = await _authStateProvider.GetAuthenticationStateAsync();
+
+               * Возвращается значение, указывающее, аутентифицирован ли пользователь, 
+                 используя свойство Identity.IsAuthenticated, которое возвращает true, если идентификация 
+                 пользователя прошла успешно, иначе возвращает false 
+                 - return authenticationState.User.Identity.IsAuthenticated;
+           */
+        public async Task<bool> IsUserAuthenticated()
+        {
+            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
+        }
 
         public async Task<ServiceResponse<bool>> ChangePassword(UserChangePassword request)
         {
