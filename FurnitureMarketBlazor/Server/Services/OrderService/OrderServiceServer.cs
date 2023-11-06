@@ -127,6 +127,7 @@
 
             // Вычисляем общую стоимость всех товаров в корзине
             decimal totalPrice = 0;
+
             products.ForEach(product =>
             {
                 totalPrice += product.Price * product.Quantity;
@@ -134,14 +135,15 @@
 
             // Создаем список OrderItem на основе товаров из корзины
             var orderItems = new List<OrderItem>();
-            products.ForEach(product => orderItems.Add(
-                new OrderItem
-                {
-                    ProductId = product.ProductId,
-                    ProductTypeId = product.ProductTypeId,
-                    Quantity = product.Quantity,
-                    TotalPrice = product.Price * product.Quantity
-                }));
+            products.ForEach(product =>
+                orderItems.Add(
+                    new OrderItem
+                    {
+                        ProductId = product.ProductId,
+                        ProductTypeId = product.ProductTypeId,
+                        Quantity = product.Quantity,
+                        TotalPrice = product.Price * product.Quantity
+                    }));
 
             // Создаем объект Order со значениями для размещения заказа
             var order = new Order

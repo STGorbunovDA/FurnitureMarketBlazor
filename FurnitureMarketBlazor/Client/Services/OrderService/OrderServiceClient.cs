@@ -5,16 +5,11 @@ namespace FurnitureMarketBlazor.Client.Services.OrderService
     public class OrderServiceClient : IOrderServiceClient
     {
         private readonly HttpClient _http;
-        private readonly AuthenticationStateProvider _authStateProvider;
+        private readonly IAuthServiceClient _authService;
         private readonly NavigationManager _navigationManager;
 
-        public OrderServiceClient(HttpClient http, AuthenticationStateProvider authStateProvider, NavigationManager navigationManager) =>
-            (_http, _authStateProvider, _navigationManager) = (http, authStateProvider, navigationManager);
-
-        private async Task<bool> IsUserAuthenticated()
-        {
-            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
-        }
+        public OrderServiceClient(HttpClient http, IAuthServiceClient authService, NavigationManager navigationManager) =>
+            (_http, _authService, _navigationManager) = (http, authService, navigationManager);
 
         public async Task<OrderDetailsResponse> GetOrderDetails(int orderId)
         {
@@ -30,14 +25,10 @@ namespace FurnitureMarketBlazor.Client.Services.OrderService
 
         public async Task PlaceOrder()
         {
-            if (await IsUserAuthenticated())
-            {
+            if (await _authService.IsUserAuthenticated())
                 await _http.PostAsync("api/order", null);
-            }
             else
-            {
                 _navigationManager.NavigateTo("login");
-            }
         }
     }
 }
