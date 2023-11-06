@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using FurnitureMarketBlazor.Shared.ProductsFolder;
 
-namespace FurnitureMarketBlazor.Shared
+namespace FurnitureMarketBlazor.Shared.OrderFolder
 {
     public class OrderItem
     {

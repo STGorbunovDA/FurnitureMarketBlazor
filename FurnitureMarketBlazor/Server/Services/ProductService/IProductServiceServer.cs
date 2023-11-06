@@ -1,4 +1,7 @@
-﻿namespace FurnitureMarketBlazor.Server.Services.ProductService
+﻿using FurnitureMarketBlazor.Shared.DTO;
+using FurnitureMarketBlazor.Shared.ProductsFolder;
+
+namespace FurnitureMarketBlazor.Server.Services.ProductService
 {
     public interface IProductServiceServer
     {

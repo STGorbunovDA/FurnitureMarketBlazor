@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace FurnitureMarketBlazor.Shared
+namespace FurnitureMarketBlazor.Shared.ProductsFolder
 {
     public class ProductVariant
     {

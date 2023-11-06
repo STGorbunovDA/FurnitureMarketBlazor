@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using FurnitureMarketBlazor.Shared.DTO;
+using FurnitureMarketBlazor.Shared.ProductsFolder;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FurnitureMarketBlazor.Server.Services.ProductService
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FurnitureMarketBlazor.Shared
+namespace FurnitureMarketBlazor.Shared.UserFolder
 {
     public class UserRegister
     {

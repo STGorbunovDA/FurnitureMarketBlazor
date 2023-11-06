@@ -1,4 +1,4 @@
-﻿namespace FurnitureMarketBlazor.Shared
+﻿namespace FurnitureMarketBlazor.Shared.CartFolder
 {
     public class CartProductResponse
     {

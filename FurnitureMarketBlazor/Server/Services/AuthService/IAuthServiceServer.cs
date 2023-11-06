@@ -1,4 +1,7 @@
-﻿namespace FurnitureMarketBlazor.Server.Services.AuthService
+﻿using FurnitureMarketBlazor.Shared.DTO;
+using FurnitureMarketBlazor.Shared.UserFolder;
+
+namespace FurnitureMarketBlazor.Server.Services.AuthService
 {
     public interface IAuthServiceServer
     {

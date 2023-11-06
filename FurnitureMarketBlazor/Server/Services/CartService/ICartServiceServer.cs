@@ -1,4 +1,7 @@
-﻿namespace FurnitureMarketBlazor.Server.Services.CartService
+﻿using FurnitureMarketBlazor.Shared.CartFolder;
+using FurnitureMarketBlazor.Shared.DTO;
+
+namespace FurnitureMarketBlazor.Server.Services.CartService
 {
     public interface ICartServiceServer
     {

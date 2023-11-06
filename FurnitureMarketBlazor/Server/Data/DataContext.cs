@@ -1,4 +1,9 @@
-﻿namespace FurnitureMarketBlazor.Server.Data
+﻿using FurnitureMarketBlazor.Shared.CartFolder;
+using FurnitureMarketBlazor.Shared.OrderFolder;
+using FurnitureMarketBlazor.Shared.ProductsFolder;
+using FurnitureMarketBlazor.Shared.UserFolder;
+
+namespace FurnitureMarketBlazor.Server.Data
 {
     public class DataContext : DbContext
     {

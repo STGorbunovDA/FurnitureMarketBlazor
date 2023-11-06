@@ -1,4 +1,4 @@
-﻿namespace FurnitureMarketBlazor.Shared
+﻿namespace FurnitureMarketBlazor.Shared.UserFolder
 {
     public class User
     {

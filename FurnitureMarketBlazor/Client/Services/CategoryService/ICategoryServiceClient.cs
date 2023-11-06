@@ -1,4 +1,6 @@
-﻿namespace FurnitureMarketBlazor.Client.Services.CategoryService
+﻿using FurnitureMarketBlazor.Shared.ProductsFolder;
+
+namespace FurnitureMarketBlazor.Client.Services.CategoryService
 {
     public interface ICategoryServiceClient
     {

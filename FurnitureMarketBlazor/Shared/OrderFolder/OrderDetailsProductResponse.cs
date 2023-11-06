@@ -1,4 +1,4 @@
-﻿namespace FurnitureMarketBlazor.Shared
+﻿namespace FurnitureMarketBlazor.Shared.OrderFolder
 {
     // Детали заказа Ответ по продукту
     public class OrderDetailsProductResponse

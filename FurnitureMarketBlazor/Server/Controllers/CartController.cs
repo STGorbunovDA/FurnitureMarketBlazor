@@ -1,4 +1,7 @@
-﻿namespace FurnitureMarketBlazor.Server.Controllers
+﻿using FurnitureMarketBlazor.Shared.CartFolder;
+using FurnitureMarketBlazor.Shared.DTO;
+
+namespace FurnitureMarketBlazor.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,4 +1,8 @@
-global using FurnitureMarketBlazor.Shared;
+global using FurnitureMarketBlazor.Shared.DTO;
+global using FurnitureMarketBlazor.Shared.ProductsFolder;
+global using FurnitureMarketBlazor.Shared.UserFolder;
+global using FurnitureMarketBlazor.Shared.OrderFolder;
+global using FurnitureMarketBlazor.Shared.CartFolder;
 global using System.Net.Http.Json;
 global using FurnitureMarketBlazor.Client.Services.ProductService;
 global using FurnitureMarketBlazor.Client.Services.CategoryService;
