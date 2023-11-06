@@ -1,6 +1,6 @@
 ﻿namespace FurnitureMarketBlazor.Shared.OrderFolder
 {
-    // Детали заказа Ответ по продукту
+    // Для просмотра деталей заказа Order`s
     public class OrderDetailsProductResponse
     {
         public int ProductId { get; set; }

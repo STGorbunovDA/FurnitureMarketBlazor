@@ -1,6 +1,6 @@
 ﻿namespace FurnitureMarketBlazor.Shared.OrderFolder
 {
-    // Ответ на детали заказа
+    // Хранение общих Деталей Order's
     public class OrderDetailsResponse
     {
         public DateTime OrderDate { get; set; }

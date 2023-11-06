@@ -1,13 +1,15 @@
-﻿@page "/orders/{orderId:int}"
+﻿@page "/orders/{OrderId:int}"
 @inject IOrderServiceClient OrderService
+
+<PageTitle>OrderDetails</PageTitle>
 
 @if (order == null)
 {
-    <span>Loading order...</span>
+    <span>Загружаю ваши заказы...</span>
 }
 else
 {
-    <h3>Order from @order.OrderDate</h3>
+    <h3>Дата заказа: @order.OrderDate</h3>
 
     <div>
         @foreach (var product in order.Products)
@@ -33,8 +35,7 @@ else
 }
 
 @code {
-    [Parameter]
-    public int OrderId { get; set; }
+    [Parameter] public int OrderId { get; set; }
 
     OrderDetailsResponse order = null;
 

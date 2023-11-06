@@ -80,11 +80,10 @@
             var orderResponse = new List<OrderOverviewResponse>();
 
             // Заполняем список OrderOverviewResponse на основе полученных заказов
-
             orders.ForEach(o =>
             {
                 var products = o.OrderItems.Select(oi => oi.Product.Title);
-                var productCount = o.OrderItems.Count;
+                //var productCount = o.OrderItems.Count;
 
                 string productText = string.Join(", ", products);
 
@@ -94,7 +93,7 @@
                     OrderDate = o.OrderDate,
                     TotalPrice = o.TotalPrice,
                     Product = productText,
-                    ProductImageUrl = o.OrderItems.First().Product.ImageUrl
+                    ProductImageUrl = o.OrderItems.First().Product.ImageUrl // Показать первую картинку продукта
                 });
             });
 
