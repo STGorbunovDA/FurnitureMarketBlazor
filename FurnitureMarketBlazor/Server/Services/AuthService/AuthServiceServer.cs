@@ -9,8 +9,23 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
     {
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthServiceServer(DataContext context, IConfiguration configuration) => (_context, _configuration) = (context, configuration);
+        public AuthServiceServer(DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) =>
+            (_context, _configuration, _httpContextAccessor) = (context, configuration, httpContextAccessor);
+
+        /*
+          * Этот метод возвращает идентификатор пользователя, используя объект _httpContextAccessor, 
+            который предоставляет доступ к текущему объекту HttpContext.
+
+          * Внутри метода вызывается FindFirstValue(ClaimTypes.NameIdentifier), чтобы найти 
+            идентификатор пользователя в контексте запроса. ClaimTypes.NameIdentifier представляет 
+            тип утверждения, который обычно содержит идентификатор пользователя.
+
+          * Затем полученный идентификатор пользователя преобразуется в целочисленное значение 
+            с помощью int.Parse(). В итоге метод возвращает идентификатор пользователя в виде целого числа.
+      */
+        public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
         // Метод для аутентификации пользователя
         public async Task<ServiceResponse<string>> Login(string email, string password)

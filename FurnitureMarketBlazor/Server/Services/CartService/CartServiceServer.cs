@@ -5,23 +5,11 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
     public class CartServiceServer : ICartServiceServer
     {
         private readonly DataContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IAuthServiceServer _authService;
 
-        public CartServiceServer(DataContext context, IHttpContextAccessor httpContextAccessor) =>
-            (_context, _httpContextAccessor) = (context, httpContextAccessor);
+        public CartServiceServer(DataContext context, IAuthServiceServer authService) =>
+            (_context, _authService) = (context, authService);
 
-        /*
-            * Этот метод возвращает идентификатор пользователя, используя объект _httpContextAccessor, 
-              который предоставляет доступ к текущему объекту HttpContext.
-
-            * Внутри метода вызывается FindFirstValue(ClaimTypes.NameIdentifier), чтобы найти 
-              идентификатор пользователя в контексте запроса. ClaimTypes.NameIdentifier представляет 
-              тип утверждения, который обычно содержит идентификатор пользователя.
-
-            * Затем полученный идентификатор пользователя преобразуется в целочисленное значение 
-              с помощью int.Parse(). В итоге метод возвращает идентификатор пользователя в виде целого числа.
-        */
-        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
         /*
             * Метод GetCartProducts() принимает список cartItems, каждый элемент которого представляет 
@@ -90,7 +78,7 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
         {
             // Для каждого элемента cartItem в списке cartItems задается значение свойства
             // UserId с помощью метода GetUserId()
-            cartItems.ForEach(cartItem => cartItem.UserId = GetUserId());
+            cartItems.ForEach(cartItem => cartItem.UserId = _authService.GetUserId());
 
             // Добавление всех элементов из списка cartItems в DbSet CartItems в контекст базы данных _context
             _context.CartItems.AddRange(cartItems);
@@ -124,7 +112,7 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
                   список продуктов корзины, готовый для использования.
             */
             return await GetCartProducts(await _context.CartItems
-                .Where(ci => ci.UserId == GetUserId()).ToListAsync());
+                .Where(ci => ci.UserId == _authService.GetUserId()).ToListAsync());
         }
 
         /*
@@ -133,7 +121,7 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
         public async Task<ServiceResponse<int>> GetCartItemsCount()
         {
             // Объявляем переменную count для хранения количества элементов корзины
-            var count = (await _context.CartItems.Where(ci => ci.UserId == GetUserId()).ToListAsync()).Count;
+            var count = (await _context.CartItems.Where(ci => ci.UserId == _authService.GetUserId()).ToListAsync()).Count;
 
             // Создаем новый объект ServiceResponse<int> и устанавливаем его свойство
             // Data равным значению переменной count
@@ -146,7 +134,7 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
         public async Task<ServiceResponse<bool>> AddToCart(CartItem cartItem)
         {
             // Присваиваем свойству UserId объекта cartItem значение, полученное из метода GetUserId()
-            cartItem.UserId = GetUserId();
+            cartItem.UserId = _authService.GetUserId();
 
             // Выполняется асинхронный запрос к базе данных с помощью _context.CartItems, чтобы
             // получить первый элемент корзины, у которого значение свойства ProductId равно
@@ -158,11 +146,9 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
                 ci.ProductTypeId == cartItem.ProductTypeId && ci.UserId == cartItem.UserId);
 
             // Проверяем, есть ли в корзине уже элемент с такими же значениями ProductId, ProductTypeId и UserId
+            // Если такого элемента нет, добавляем объект cartItem в DbSet _context.CartItems
             if (sameItem == null)
-            {
-                // Если такого элемента нет, добавляем объект cartItem в DbSet _context.CartItems
                 _context.CartItems.Add(cartItem);
-            }
             else
             {
                 // Если такой элемент уже есть в корзине, увеличиваем его Quantity
@@ -189,20 +175,13 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
             // равно значению, полученному из метода GetUserId()
             var dbCartItem = await _context.CartItems
                 .FirstOrDefaultAsync(ci => ci.ProductId == cartItem.ProductId &&
-                ci.ProductTypeId == cartItem.ProductTypeId && ci.UserId == GetUserId());
+                ci.ProductTypeId == cartItem.ProductTypeId && ci.UserId == _authService.GetUserId());
 
             // Проверяем, существует ли dbCartItem
+            // Если dbCartItem не существует, создаем новый объект ServiceResponse<bool> с
+            // установленными свойствами Data = false, Success = false и Message = "Cart item does not exist."
             if (dbCartItem == null)
-            {
-                // Если dbCartItem не существует, создаем новый объект ServiceResponse<bool> с
-                // установленными свойствами Data = false, Success = false и Message = "Cart item does not exist."
-                return new ServiceResponse<bool>
-                {
-                    Data = false,
-                    Success = false,
-                    Message = "Cart item does not exist."
-                };
-            }
+                return new ServiceResponse<bool> { Data = false, Success = false, Message = "Cart item does not exist." };
 
             // Устанавливаем значение свойства Quantity объекта dbCartItem равным
             // значению свойства Quantity объекта cartItem
@@ -226,20 +205,14 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
             // и значение свойства UserId равно значению, полученному из метода GetUserId()
             var dbCartItem = await _context.CartItems
                 .FirstOrDefaultAsync(ci => ci.ProductId == productId &&
-                ci.ProductTypeId == productTypeId && ci.UserId == GetUserId());
+                ci.ProductTypeId == productTypeId && ci.UserId == _authService.GetUserId());
 
             // Проверяем, существует ли dbCartItem
+            // Если dbCartItem не существует, создаем новый объект ServiceResponse<bool> с
+            // установленными свойствами Data = false, Success = false и Message = "Cart item does not exist."
             if (dbCartItem == null)
-            {
-                // Если dbCartItem не существует, создаем новый объект ServiceResponse<bool> с
-                // установленными свойствами Data = false, Success = false и Message = "Cart item does not exist."
-                return new ServiceResponse<bool>
-                {
-                    Data = false,
-                    Success = false,
-                    Message = "Cart item does not exist."
-                };
-            }
+                return new ServiceResponse<bool> { Data = false, Success = false, Message = "Cart item does not exist." };
+
             // Удаляем dbCartItem из контекста базы данных
             _context.CartItems.Remove(dbCartItem);
 

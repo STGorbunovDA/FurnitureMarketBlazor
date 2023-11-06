@@ -6,6 +6,7 @@ global using FurnitureMarketBlazor.Server.Services.ProductService;
 global using FurnitureMarketBlazor.Server.Services.CategoryService;
 global using FurnitureMarketBlazor.Server.Services.CartService;
 global using FurnitureMarketBlazor.Server.Services.AuthService;
+global using FurnitureMarketBlazor.Server.Services.OrderService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -27,6 +28,7 @@ builder.Services.AddScoped<IProductServiceServer, ProductServiceServer>();
 builder.Services.AddScoped<ICategoryServiceServer, CategoryServiceServer>();
 builder.Services.AddScoped<ICartServiceServer, CartServiceServer>();
 builder.Services.AddScoped<IAuthServiceServer, AuthServiceServer>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 /*
     *  В данном коде настраивается аутентификация с помощью JWT, где выполняется проверка подписи 
