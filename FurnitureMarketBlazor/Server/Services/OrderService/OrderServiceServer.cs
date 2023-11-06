@@ -80,17 +80,39 @@
             var orderResponse = new List<OrderOverviewResponse>();
 
             // Заполняем список OrderOverviewResponse на основе полученных заказов
-            orders.ForEach(o => orderResponse.Add(new OrderOverviewResponse
+
+            orders.ForEach(o =>
             {
-                Id = o.Id,
-                OrderDate = o.OrderDate,
-                TotalPrice = o.TotalPrice,
-                Product = o.OrderItems.Count > 1 ?
-                    $"{o.OrderItems.First().Product.Title} and" +
-                    $" {o.OrderItems.Count - 1} more..." :
-                    o.OrderItems.First().Product.Title,
-                ProductImageUrl = o.OrderItems.First().Product.ImageUrl
-            }));
+                var products = o.OrderItems.Select(oi => oi.Product.Title);
+                var productCount = o.OrderItems.Count;
+
+                string productText = string.Join(", ", products);
+
+                orderResponse.Add(new OrderOverviewResponse
+                {
+                    Id = o.Id,
+                    OrderDate = o.OrderDate,
+                    TotalPrice = o.TotalPrice,
+                    Product = productText,
+                    ProductImageUrl = o.OrderItems.First().Product.ImageUrl
+                });
+            });
+
+            #region старый метод
+
+            //orders.ForEach(o => orderResponse.Add(new OrderOverviewResponse
+            //{
+            //    Id = o.Id,
+            //    OrderDate = o.OrderDate,
+            //    TotalPrice = o.TotalPrice,
+            //    Product = o.OrderItems.Count > 1 ?
+            //        $"{o.OrderItems.First().Product.Title} and" +
+            //        $" {o.OrderItems.Count - 1} more..." :
+            //        o.OrderItems.First().Product.Title,
+            //    ProductImageUrl = o.OrderItems.First().Product.ImageUrl
+            //}));
+
+            #endregion
 
             // Устанавливаем полученные данные в response и возвращаем response
             response.Data = orderResponse;
