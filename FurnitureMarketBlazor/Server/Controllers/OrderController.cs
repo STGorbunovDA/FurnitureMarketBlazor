@@ -4,9 +4,9 @@
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderService _orderService;
+        private readonly IOrderServiceServer _orderService;
 
-        public OrderController(IOrderService orderService) => _orderService = orderService;
+        public OrderController(IOrderServiceServer orderService) => _orderService = orderService;
 
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<bool>>> PlaceOrder()

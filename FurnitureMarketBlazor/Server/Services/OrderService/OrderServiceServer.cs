@@ -1,12 +1,12 @@
 ﻿namespace FurnitureMarketBlazor.Server.Services.OrderService
 {
-    public class OrderService : IOrderService
+    public class OrderServiceServer : IOrderServiceServer
     {
         private readonly DataContext _context;
         private readonly ICartServiceServer _cartService;
         private readonly IAuthServiceServer _authService;
 
-        public OrderService(DataContext context, ICartServiceServer cartService, IAuthServiceServer authService) =>
+        public OrderServiceServer(DataContext context, ICartServiceServer cartService, IAuthServiceServer authService) =>
             (_context, _cartService, _authService) = (context, cartService, authService);
 
         // Метод для получения деталей заказа по его идентификатору

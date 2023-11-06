@@ -1,6 +1,6 @@
 ﻿namespace FurnitureMarketBlazor.Server.Services.OrderService
 {
-    public interface IOrderService
+    public interface IOrderServiceServer
     {
         Task<ServiceResponse<bool>> PlaceOrder();
         Task<ServiceResponse<List<OrderOverviewResponse>>> GetOrders();

@@ -28,7 +28,7 @@ builder.Services.AddScoped<IProductServiceServer, ProductServiceServer>();
 builder.Services.AddScoped<ICategoryServiceServer, CategoryServiceServer>();
 builder.Services.AddScoped<ICartServiceServer, CartServiceServer>();
 builder.Services.AddScoped<IAuthServiceServer, AuthServiceServer>();
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderServiceServer, OrderServiceServer>();
 
 /*
     *  В данном коде настраивается аутентификация с помощью JWT, где выполняется проверка подписи 
