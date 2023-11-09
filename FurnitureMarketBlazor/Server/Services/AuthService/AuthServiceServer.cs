@@ -1,6 +1,4 @@
-﻿using FurnitureMarketBlazor.Shared.DTO;
-using FurnitureMarketBlazor.Shared.UserFolder;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -26,8 +24,19 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
 
           * Затем полученный идентификатор пользователя преобразуется в целочисленное значение 
             с помощью int.Parse(). В итоге метод возвращает идентификатор пользователя в виде целого числа.
-      */
+        */
         public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+
+        /*
+         * Этот метод возвращает имя пользователя, используя объект _httpContextAccessor, 
+           который предоставляет доступ к текущему объекту HttpContext.
+
+         * Внутри метода вызывается FindFirstValue(ClaimTypes.Name), чтобы найти 
+           имя пользователя в контексте запроса. ClaimTypes.Name представляет 
+           тип утверждения, который обычно содержит имя пользователя.
+        */
+        public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
 
         // Метод для аутентификации пользователя
         public async Task<ServiceResponse<string>> Login(string email, string password)
@@ -229,6 +238,11 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
             await _context.SaveChangesAsync();
 
             return new ServiceResponse<bool> { Data = true, Message = "Password has been changed." };
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
         }
     }
 }

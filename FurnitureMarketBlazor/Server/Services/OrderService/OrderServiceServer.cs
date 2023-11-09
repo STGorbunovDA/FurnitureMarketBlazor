@@ -119,10 +119,10 @@
         }
 
         // Метод для размещения заказа
-        public async Task<ServiceResponse<bool>> PlaceOrder()
+        public async Task<ServiceResponse<bool>> PlaceOrder(int userId)
         {
             // Получаем список товаров корзины из сервиса корзины
-            var products = (await _cartService.GetDbCartProducts()).Data;
+            var products = (await _cartService.GetDbCartProducts(userId)).Data;
 
             // Вычисляем общую стоимость всех товаров в корзине
             decimal totalPrice = 0;
@@ -147,7 +147,7 @@
             // Создаем объект Order со значениями для размещения заказа
             var order = new Order
             {
-                UserId = _authService.GetUserId(),
+                UserId = userId,
                 OrderDate = DateTime.Now,
                 TotalPrice = totalPrice,
                 OrderItems = orderItems
@@ -158,7 +158,7 @@
 
             // Удаляем элементы корзины пользователя из базы данных
             _context.CartItems.RemoveRange(_context.CartItems
-                .Where(ci => ci.UserId == _authService.GetUserId()));
+                .Where(ci => ci.UserId == userId));
 
             // Сохраняем изменения в базе данных
             await _context.SaveChangesAsync();

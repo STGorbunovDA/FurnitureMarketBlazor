@@ -97,7 +97,7 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
               полученным списком элементов из базы данных, соответствующим условию, что значение
               свойства UserId равно значению, возвращаемому методом GetUserId()  
         */
-        public async Task<ServiceResponse<List<CartProductResponse>>> GetDbCartProducts()
+        public async Task<ServiceResponse<List<CartProductResponse>>> GetDbCartProducts(int? userId = null)
         {
             /*
                 * Вызывается метод _context.CartItems, который представляет таблицу элементов 
@@ -113,8 +113,12 @@ namespace FurnitureMarketBlazor.Server.Services.CartService
                   ServiceResponse<List<CartProductResponse>> - ответ службы, содержащий 
                   список продуктов корзины, готовый для использования.
             */
+
+            if (userId == null)
+                userId = _authService.GetUserId();
+
             return await GetCartProducts(await _context.CartItems
-                .Where(ci => ci.UserId == _authService.GetUserId()).ToListAsync());
+                .Where(ci => ci.UserId == userId).ToListAsync());
         }
 
         /*
