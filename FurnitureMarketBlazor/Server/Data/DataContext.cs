@@ -1,9 +1,4 @@
-﻿using FurnitureMarketBlazor.Shared.CartFolder;
-using FurnitureMarketBlazor.Shared.OrderFolder;
-using FurnitureMarketBlazor.Shared.ProductsFolder;
-using FurnitureMarketBlazor.Shared.UserFolder;
-
-namespace FurnitureMarketBlazor.Server.Data
+﻿namespace FurnitureMarketBlazor.Server.Data
 {
     public class DataContext : DbContext
     {
@@ -15,6 +10,7 @@ namespace FurnitureMarketBlazor.Server.Data
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 

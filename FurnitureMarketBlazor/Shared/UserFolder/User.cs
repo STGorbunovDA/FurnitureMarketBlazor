@@ -1,4 +1,6 @@
-﻿namespace FurnitureMarketBlazor.Shared.UserFolder
+﻿using System.Net;
+
+namespace FurnitureMarketBlazor.Shared.UserFolder
 {
     public class User
     {
@@ -7,5 +9,6 @@
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
+        public Address Address { get; set; }
     }
 }
