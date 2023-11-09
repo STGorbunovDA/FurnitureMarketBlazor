@@ -10,10 +10,12 @@ global using FurnitureMarketBlazor.Client.Services.CartService;
 global using FurnitureMarketBlazor.Client.Services.AuthService;
 global using FurnitureMarketBlazor.Client.Services.OrderService;
 global using Microsoft.AspNetCore.Components.Authorization;
+global using FurnitureMarketBlazor.Client.Services.AddressService;
 using FurnitureMarketBlazor.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Blazored.LocalStorage;
+
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -26,6 +28,7 @@ builder.Services.AddScoped<ICategoryServiceClient, CategoryServiceClient>();
 builder.Services.AddScoped<ICartServiceClient, CartServiceClient>();
 builder.Services.AddScoped<IAuthServiceClient, AuthServiceClient>();
 builder.Services.AddScoped<IOrderServiceClient, OrderServiceClient>();
+builder.Services.AddScoped<IAddressServiceClient, AddressServiceClient>();
 
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
