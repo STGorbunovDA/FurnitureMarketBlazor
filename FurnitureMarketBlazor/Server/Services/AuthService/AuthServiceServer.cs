@@ -195,7 +195,8 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
             {
                 // Создание утверждений (claims) для токена, включающих идентификатор и email пользователя
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Email)
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             // Получение ключа для создания подписи токена из конфигурационного файла

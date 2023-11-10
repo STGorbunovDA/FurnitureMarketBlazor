@@ -10,5 +10,6 @@ namespace FurnitureMarketBlazor.Shared.UserFolder
         public byte[] PasswordSalt { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public Address Address { get; set; }
+        public string Role { get; set; } = "Customer";
     }
 }

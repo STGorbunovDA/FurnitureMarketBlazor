@@ -4,6 +4,7 @@ using FurnitureMarketBlazor.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FurnitureMarketBlazor.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231110114037_UserRole")]
+    partial class UserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,9 +99,6 @@ namespace FurnitureMarketBlazor.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -107,9 +106,6 @@ namespace FurnitureMarketBlazor.Server.Migrations
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -119,26 +115,20 @@ namespace FurnitureMarketBlazor.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Deleted = false,
                             Name = "Кухни",
-                            Url = "kitchens",
-                            Visible = true
+                            Url = "kitchens"
                         },
                         new
                         {
                             Id = 2,
-                            Deleted = false,
                             Name = "Мебель",
-                            Url = "furniture",
-                            Visible = true
+                            Url = "furniture"
                         },
                         new
                         {
                             Id = 3,
-                            Deleted = false,
                             Name = "Санузел",
-                            Url = "bathroom",
-                            Visible = true
+                            Url = "bathroom"
                         });
                 });
 

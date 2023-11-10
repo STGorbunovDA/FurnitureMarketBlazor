@@ -1,10 +1,15 @@
-﻿using FurnitureMarketBlazor.Shared.ProductsFolder;
-
-namespace FurnitureMarketBlazor.Client.Services.CategoryService
+﻿namespace FurnitureMarketBlazor.Client.Services.CategoryService
 {
     public interface ICategoryServiceClient
     {
+        event Action OnChange;
         List<Category> Categories { get; set; }
+        List<Category> AdminCategories { get; set; }
         Task GetCategories();
+        Task GetAdminCategories();
+        Task AddCategory(Category category);
+        Task UpdateCategory(Category category);
+        Task DeleteCategory(int categoryId);
+        Category CreateNewCategory();
     }
 }
