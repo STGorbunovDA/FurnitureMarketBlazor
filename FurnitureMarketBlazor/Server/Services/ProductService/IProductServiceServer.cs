@@ -1,7 +1,4 @@
-﻿using FurnitureMarketBlazor.Shared.DTO;
-using FurnitureMarketBlazor.Shared.ProductsFolder;
-
-namespace FurnitureMarketBlazor.Server.Services.ProductService
+﻿namespace FurnitureMarketBlazor.Server.Services.ProductService
 {
     public interface IProductServiceServer
     {
@@ -11,5 +8,10 @@ namespace FurnitureMarketBlazor.Server.Services.ProductService
         Task<ServiceResponse<ProductSearchResult>> SearchProductsAsync(string searchText, int page);
         Task<ServiceResponse<List<string>>> GetProductSearchSuggestionsAsync(string searchText);
         Task<ServiceResponse<List<Product>>> GetFeaturedProductsAsync();
+
+        Task<ServiceResponse<List<Product>>> GetAdminProducts();
+        Task<ServiceResponse<Product>> CreateProduct(Product product);
+        Task<ServiceResponse<Product>> UpdateProduct(Product product);
+        Task<ServiceResponse<bool>> DeleteProduct(int productId);
     }
 }
