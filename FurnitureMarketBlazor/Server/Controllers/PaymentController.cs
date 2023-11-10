@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace FurnitureMarketBlazor.Server.Controllers
+﻿namespace FurnitureMarketBlazor.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

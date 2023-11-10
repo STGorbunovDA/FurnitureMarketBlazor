@@ -1,7 +1,4 @@
-﻿using FurnitureMarketBlazor.Shared.DTO;
-using FurnitureMarketBlazor.Shared.ProductsFolder;
-
-namespace FurnitureMarketBlazor.Client.Services.ProductService
+﻿namespace FurnitureMarketBlazor.Client.Services.ProductService
 {
     public class ProductServiceClient : IProductServiceClient
     {

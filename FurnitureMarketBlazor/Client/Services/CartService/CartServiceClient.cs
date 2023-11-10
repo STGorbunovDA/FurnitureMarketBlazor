@@ -1,6 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using FurnitureMarketBlazor.Shared.CartFolder;
-using FurnitureMarketBlazor.Shared.DTO;
 
 namespace FurnitureMarketBlazor.Client.Services.CartService
 {

@@ -1,6 +1,4 @@
-﻿using FurnitureMarketBlazor.Shared.CartFolder;
-
-namespace FurnitureMarketBlazor.Client.Services.CartService
+﻿namespace FurnitureMarketBlazor.Client.Services.CartService
 {
     public interface ICartServiceClient
     {
