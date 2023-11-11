@@ -6,11 +6,9 @@
 
         private static string[] ReadDataFromFile()
         {
-            string filePath = "C:\\Users\\bous0\\OneDrive\\Desktop\\API.txt"; // Укажите путь к файлу .txt
+            string filePath = "C:\\Users\\bous0\\OneDrive\\Desktop\\API.txt";
 
-            string[] data = File.ReadAllLines(filePath);
-
-            return data;
+            return File.ReadAllLines(filePath);
         }
     }
 }

@@ -2,21 +2,13 @@
 {
     public class ProductTypeServiceClient : IProductTypeServiceClient
     {
-        private readonly HttpClient _http;
-
         public event Action OnChange;
 
-        public ProductTypeServiceClient(HttpClient http) => _http = http;
-
+        private readonly HttpClient _http;
 
         public List<ProductType> ProductTypes { get; set; } = new List<ProductType>();
 
-        public async Task AddProductType(ProductType productType)
-        {
-            var response = await _http.PostAsJsonAsync("api/producttype", productType);
-            ProductTypes = (await response.Content.ReadFromJsonAsync<ServiceResponse<List<ProductType>>>()).Data;
-            OnChange.Invoke();
-        }
+        public ProductTypeServiceClient(HttpClient http) => _http = http;
 
         public ProductType CreateNewProductType()
         {
@@ -25,6 +17,13 @@
             ProductTypes.Add(newProductType);
             OnChange.Invoke();
             return newProductType;
+        }
+
+        public async Task AddProductType(ProductType productType)
+        {
+            var response = await _http.PostAsJsonAsync("api/producttype", productType);
+            ProductTypes = (await response.Content.ReadFromJsonAsync<ServiceResponse<List<ProductType>>>()).Data;
+            OnChange.Invoke();
         }
 
         public async Task GetProductTypes()

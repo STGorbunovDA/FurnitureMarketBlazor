@@ -2,13 +2,13 @@
 {
     public class CategoryServiceClient : ICategoryServiceClient
     {
-        private readonly HttpClient _http;
         public event Action OnChange;
 
-        public CategoryServiceClient(HttpClient http) => _http = http;
-
+        private readonly HttpClient _http;
         public List<Category> Categories { get; set; } = new List<Category>();
         public List<Category> AdminCategories { get; set; } = new List<Category>();
+
+        public CategoryServiceClient(HttpClient http) => _http = http;
 
         public async Task AddCategory(Category category)
         {
@@ -28,7 +28,7 @@
 
         public async Task DeleteCategory(int categoryId)
         {
-            var response = await _http.DeleteAsync($"api/Category/admin/{categoryId}");
+            var response = await _http.DeleteAsync($"api/category/admin/{categoryId}");
             AdminCategories = (await response.Content.ReadFromJsonAsync<ServiceResponse<List<Category>>>()).Data;
             await GetCategories();
             OnChange.Invoke();

@@ -1,8 +1,4 @@
-﻿using System.Security.Claims;
-using FurnitureMarketBlazor.Shared.CartFolder;
-using FurnitureMarketBlazor.Shared.DTO;
-
-namespace FurnitureMarketBlazor.Server.Services.CartService
+﻿namespace FurnitureMarketBlazor.Server.Services.CartService
 {
     public class CartServiceServer : ICartServiceServer
     {

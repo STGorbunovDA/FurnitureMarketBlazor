@@ -2,6 +2,9 @@
 {
     public class DataContext : DbContext
     {
+        //dotnet ef migrations add CreateInitial - добавить миграцию
+        //dotnet ef migrations remove - удалить миграцию
+        //dotnet ef database update
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }

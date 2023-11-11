@@ -27,7 +27,6 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
         */
         public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-
         /*
          * Этот метод возвращает имя пользователя, используя объект _httpContextAccessor, 
            который предоставляет доступ к текущему объекту HttpContext.
@@ -37,6 +36,8 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
            тип утверждения, который обычно содержит имя пользователя.
         */
         public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+
+        public string GetUserRole() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
 
         // Метод для аутентификации пользователя
         public async Task<ServiceResponse<string>> Login(string email, string password)

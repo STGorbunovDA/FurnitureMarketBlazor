@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace FurnitureMarketBlazor.Shared.UserFolder
+﻿namespace FurnitureMarketBlazor.Shared.UserFolder
 {
     public class User
     {

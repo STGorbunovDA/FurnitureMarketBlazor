@@ -3,11 +3,11 @@
 @inject NavigationManager NavigationManager
 @attribute [Authorize(Roles = "Admin")]
 
-<h3>Products</h3>
+<h3>Продукты</h3>
 
 @if (ProductService.AdminProducts == null)
 {
-    <span>Loading Products...</span>
+    <span>Загрузка продуктов...</span>
 }
 else
 {
@@ -18,10 +18,10 @@ else
         <thead>
             <tr>
                 <th></th>
-                <th>Product</th>
-                <th>Variant</th>
-                <th>Price</th>
-                <th>Visible</th>
+                <th>Продукт</th>
+                <th>Вариант</th>
+                <th>Цена</th>
+                <th>Видимость</th>
                 <th></th>
             </tr>
         </thead>
@@ -43,7 +43,6 @@ else
                         @foreach (var variant in product.Variants)
                         {
                             <span>@variant.ProductType.Name</span>
-
                             <br />
                         }
                     </td>
@@ -51,7 +50,6 @@ else
                         @foreach (var variant in product.Variants)
                         {
                             <span>@variant.Price</span>
-
                             <br />
                         }
                     </td>

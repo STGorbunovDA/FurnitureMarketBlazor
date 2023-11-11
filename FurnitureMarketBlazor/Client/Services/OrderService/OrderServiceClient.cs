@@ -6,10 +6,9 @@ namespace FurnitureMarketBlazor.Client.Services.OrderService
     {
         private readonly HttpClient _http;
         private readonly IAuthServiceClient _authService;
-        private readonly NavigationManager _navigationManager;
 
         public OrderServiceClient(HttpClient http, IAuthServiceClient authService, NavigationManager navigationManager) =>
-            (_http, _authService, _navigationManager) = (http, authService, navigationManager);
+            (_http, _authService) = (http, authService);
 
         public async Task<OrderDetailsResponse> GetOrderDetails(int orderId)
         {
@@ -31,10 +30,7 @@ namespace FurnitureMarketBlazor.Client.Services.OrderService
                 var url = await result.Content.ReadAsStringAsync();
                 return url;
             }
-            else
-            {
-                return "login";
-            }
+            else return "login";
         }
     }
 }

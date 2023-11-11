@@ -22,13 +22,13 @@ else
     }
 
     <EditForm Model="product" OnValidSubmit="AddOrUpdateProduct">
-        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <DataAnnotationsValidator />
         <div class="mb-0">
-            <label for="title">Title</label>
+            <label for="title">Название</label>
             <InputText id="title" @bind-Value="product.Title" class="form-control"></InputText>
         </div>
         <div class="mb-0">
-            <label for="imageUrl">Image Url</label>
+            <label for="imageUrl">Url картинки</label>
             <InputText id="imageUrl" @bind-Value="product.ImageUrl" class="form-control"></InputText>
         </div>
         <div class="mb-0" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
@@ -56,19 +56,19 @@ else
             }
         </div>
         <div class="mb-0">
-            <label for="images">Image(s)</label>
+            <label for="images">Картинка</label>
             <InputFile id="images" OnChange="OnFileChange" multiple class="form-control"></InputFile>
         </div>
         <div class="mb-0">
-            <label for="description">Description</label>
+            <label for="description">Описание</label>
             <InputTextArea id="description" @bind-Value="product.Description" class="form-control"></InputTextArea>
         </div>
         <hr />
         <div class="header">
-            <div class="col">Product Type / Variant</div>
-            <div class="col">Price</div>
-            <div class="col">Original Price</div>
-            <div class="col">Visible</div>
+            <div class="col">Тип продукта / Вариант</div>
+            <div class="col">Цена</div>
+            <div class="col">Оригинальная цена</div>
+            <div class="col">Видимость</div>
             <div class="col"></div>
         </div>
         @foreach (var variant in product.Variants)
@@ -99,7 +99,7 @@ else
             </div>
         }
         <button type="button" class="btn btn-primary" @onclick="AddVariant">
-            <i class="oi oi-plus"></i> Add Variant
+            <i class="oi oi-plus"></i> Добавить вариант
         </button>
         <hr />
         <div class="mb-0">
@@ -122,24 +122,23 @@ else
         </div>
         <hr />
         <button type="submit" class="btn btn-primary float-end">@btnText</button>
-        <ValidationSummary></ValidationSummary>
+        <ValidationSummary />
     </EditForm>
     @if (!product.IsNew)
     {
         <button type="button" class="btn btn-danger float-start" @onclick="DeleteProduct">
-            Delete Product
+            Удалить продукт
         </button>
     }
 }
 
 @code {
-    [Parameter]
-    public int Id { get; set; }
+    [Parameter] public int Id { get; set; }
 
     Product product = new Product();
     bool loading = true;
     string btnText = "";
-    string msg = "Loading...";
+    string msg = "Загрузка...";
 
     protected override async Task OnInitializedAsync()
     {
@@ -152,19 +151,19 @@ else
         if (Id == 0)
         {
             product = new Product { IsNew = true };
-            btnText = "Create Product";
+            btnText = "Создание продукта";
         }
         else
         {
             Product dbProduct = (await ProductService.GetProduct(Id)).Data;
             if (dbProduct == null)
             {
-                msg = $"Product with Id '{Id}' does not exist!";
+                msg = $"Продукт с идентификатором '{Id}' не существует!";
                 return;
             }
             product = dbProduct;
             product.Editing = true;
-            btnText = "Update Product";
+            btnText = "Обновить продукт";
         }
         loading = false;
     }
@@ -172,18 +171,15 @@ else
     void RemoveVariant(int productTypeId)
     {
         var variant = product.Variants.Find(v => v.ProductTypeId == productTypeId);
+
         if (variant == null)
-        {
             return;
-        }
+        
         if (variant.IsNew)
-        {
             product.Variants.Remove(variant);
-        }
+
         else
-        {
             variant.Deleted = true;
-        }
     }
 
     void AddVariant()
@@ -209,8 +205,8 @@ else
 
     async void DeleteProduct()
     {
-        bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm",
-            $"Do you really want to delete '{product.Title}'?");
+        bool confirmed = await JSRuntime.InvokeAsync<bool>("Подтверждение",
+                  $"Вы действительно хотите удалить '{product.Title}'?");
         if (confirmed)
         {
             await ProductService.DeleteProduct(product);

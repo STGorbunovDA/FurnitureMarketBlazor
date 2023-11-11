@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace FurnitureMarketBlazor.Server.Controllers
+﻿namespace FurnitureMarketBlazor.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -41,8 +39,8 @@ namespace FurnitureMarketBlazor.Server.Controllers
         [HttpPost("change-password"), Authorize] //  указывает на то, что данный метод принимает POST запрос на эндпоинт "change-password" и требует аутентификацию пользователя.
         public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword([FromBody] string newPassword) // Входной параметр [FromBody] string newPassword указывает, что новый пароль будет отправлен в теле запроса в виде строки.
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // получается идентификатор пользователя (userId) из аутентификационных данных. ClaimTypes.NameIdentifier представляет идентификатор пользователя, который был включен в токен аутентификации.
-            var response = await _authService.ChangePassword(int.Parse(userId), newPassword);
+            var userId = _authService.GetUserId(); // получается идентификатор пользователя (userId) из аутентификационных данных. ClaimTypes.NameIdentifier представляет идентификатор пользователя, который был включен в токен аутентификации.
+            var response = await _authService.ChangePassword(userId, newPassword);
 
             if (!response.Success)
                 return BadRequest(response);

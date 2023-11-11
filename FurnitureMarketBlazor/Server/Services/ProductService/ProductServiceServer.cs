@@ -3,10 +3,10 @@
     public class ProductServiceServer : IProductServiceServer
     {
         private readonly DataContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IAuthServiceServer _authService;
 
-        public ProductServiceServer(DataContext context, IHttpContextAccessor httpContextAccessor) =>
-            (_context, _httpContextAccessor) = (context, httpContextAccessor);
+        public ProductServiceServer(DataContext context, IAuthServiceServer authService) =>
+            (_context, _authService) = (context, authService);
 
         public async Task<ServiceResponse<Product>> CreateProduct(Product product)
         {
@@ -72,7 +72,9 @@
             var response = new ServiceResponse<Product>();
             Product product = null;
 
-            if (_httpContextAccessor.HttpContext.User.IsInRole("Admin"))
+            //if (_httpContextAccessor.HttpContext.User.IsInRole("Admin"))
+
+            if (_authService.GetUserRole().Equals("Admin"))
             {
                 product = await _context.Products
                     .Include(p => p.Variants.Where(v => !v.Deleted))
@@ -92,7 +94,7 @@
             if (product == null)
             {
                 response.Success = false;
-                response.Message = "Sorry, but this product does not exist.";
+                response.Message = "Извините, но этого продукта не существует.";
             }
             else response.Data = product;
 
@@ -162,8 +164,8 @@
 
             var products = await _context.Products
                                 .Where(p => p.Title.ToLower().Contains(searchText.ToLower()) ||
-                                p.Description.ToLower().Contains(searchText.ToLower()) &&
-                                p.Visible && !p.Deleted)
+                                       p.Description.ToLower().Contains(searchText.ToLower()) &&
+                                       p.Visible && !p.Deleted)
                                 .Include(p => p.Variants)
                                 .Include(p => p.Images)
                                 .Skip((page - 1) * (int)pageResults)
@@ -238,8 +240,8 @@
         {
             return await _context.Products
                                 .Where(p => p.Title.ToLower().Contains(searchText.ToLower()) ||
-                                p.Description.ToLower().Contains(searchText.ToLower()) &&
-                                p.Visible && !p.Deleted)
+                                      p.Description.ToLower().Contains(searchText.ToLower()) &&
+                                      p.Visible && !p.Deleted)
                                 .Include(p => p.Variants)
                                 .ToListAsync();
         }

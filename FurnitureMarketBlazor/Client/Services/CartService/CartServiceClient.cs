@@ -4,14 +4,14 @@ namespace FurnitureMarketBlazor.Client.Services.CartService
 {
     public class CartServiceClient : ICartServiceClient
     {
+        public event Action OnChange;
+
         private readonly ILocalStorageService _localStorage;
         private readonly HttpClient _http;
         private readonly IAuthServiceClient _authService;
 
         public CartServiceClient(ILocalStorageService localStorage, HttpClient http, IAuthServiceClient authService) =>
             (_localStorage, _http, _authService) = (localStorage, http, authService);
-
-        public event Action OnChange;
 
         public async Task GetCartItemsCount()
         {

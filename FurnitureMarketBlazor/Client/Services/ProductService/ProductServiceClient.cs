@@ -2,10 +2,9 @@
 {
     public class ProductServiceClient : IProductServiceClient
     {
-        private readonly HttpClient _http;
-
         public event Action ProductsChanged;
 
+        private readonly HttpClient _http;
         public string Message { get; set; } = "Loading products...";
         public int CurrentPage { get; set; } = 1;
         public int PageCount { get; set; } = 0;
@@ -25,7 +24,14 @@
 
         public async Task DeleteProduct(Product product)
         {
-            var result = await _http.DeleteAsync($"api/product/{product.Id}");
+            await _http.DeleteAsync($"api/product/{product.Id}");
+        }
+
+        public async Task<Product> UpdateProduct(Product product)
+        {
+            var result = await _http.PutAsJsonAsync($"api/product", product);
+            var content = await result.Content.ReadFromJsonAsync<ServiceResponse<Product>>();
+            return content.Data;
         }
 
         public async Task GetAdminProducts()
@@ -80,13 +86,6 @@
             }
             if (Products.Count == 0) Message = "No products found.";
             ProductsChanged?.Invoke();
-        }
-
-        public async Task<Product> UpdateProduct(Product product)
-        {
-            var result = await _http.PutAsJsonAsync($"api/product", product);
-            var content = await result.Content.ReadFromJsonAsync<ServiceResponse<Product>>();
-            return content.Data;
         }
     }
 }

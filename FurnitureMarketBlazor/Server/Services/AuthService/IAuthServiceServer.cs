@@ -11,6 +11,7 @@ namespace FurnitureMarketBlazor.Server.Services.AuthService
         Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword);
         int GetUserId();
         string GetUserEmail();
+        string GetUserRole();
         Task<User> GetUserByEmail(string email);
     }
 }
